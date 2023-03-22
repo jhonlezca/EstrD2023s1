@@ -219,7 +219,7 @@ swap (a,b)= (b,a)
 estaVacia :: [a] -> Bool
 estaVacia  [] = True
 estaVacia  (_:_) = False 
-
+ 
 --elPrimero :: [a] -> a
 elPrimero a = head a
  
