@@ -222,7 +222,7 @@ estaVacia  (_:_) = False
  
 --elPrimero :: [a] -> a
 elPrimero a = head a
- 
+
 --4
 
 sinElPrimero :: [a] -> [a]
