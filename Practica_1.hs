@@ -231,4 +231,4 @@ sinElPrimero a = tail a
 --5
 
 splitHead :: [a] -> (a, [a])
-splitHead a = ( elPrimero a , sinElPrimero a)
+splitHead a = ( elPrimero a , sinElPrimero a)   
