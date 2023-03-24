@@ -70,7 +70,12 @@ siguiente d =
 data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo 
 
 --a)
-primeroYUltimoDia :: (DiaDeSemana, DiaDeSemana)
+primeroYUltimoDia:: (DiaDeSemana,DiaDeSemana)
+primeroYUltimoDia = (Lunes,Domingo)
+
+{-
+  El enunciado dice que la función devuelve el par (Lunes,Domingo) nose si entendí mal pero ademas pedía hacer subtareas para que resulte mas fácil el ejercicio pero lo hice en 2 lineas la verdad o entendí mal o hay un error de tipeo
+-}
 
 
 
