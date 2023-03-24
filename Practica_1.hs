@@ -200,7 +200,7 @@ listarPokemones :: Entrenador -> [Pokemon]
 listarPokemones (E n pk1 pk2)  = [pk1, pk2]
 
 juntarPokemon :: (Entrenador, Entrenador) -> [Pokemon]
-juntarPokemon ( E  , E m pk3 pk4) = listarPokemones (E n pk1 pk2)++ listarPokemones (E m pk3 pk4)
+juntarPokemon ( E n pk1 pk2 , E m pk3 pk4) = listarPokemones (E n pk1 pk2)++ listarPokemones (E m pk3 pk4)
 
 --5
 loMismo :: a -> a
