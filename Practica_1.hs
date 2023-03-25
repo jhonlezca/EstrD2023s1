@@ -17,7 +17,7 @@ divisionYResto n m = ( div n m, mod n m)
 
 --d)
 maxDelPar :: (Int, Int) -> Int
-maxDelPar (n, m) = if (n > m )
+maxDelPar (n, m) = if n > m 
                     then n
                     else m
 
