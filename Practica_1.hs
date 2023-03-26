@@ -108,8 +108,10 @@ estaEnElMedio _        = True
 
 --3_3
 --a)
-negar :: Bool -> Bool
-negar b = not b
+negar:: Bool -> Bool 
+negar True = False 
+negar False = True 
+
 
 --b) 
 
