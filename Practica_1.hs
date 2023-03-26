@@ -234,8 +234,8 @@ elPrimero _ = error " no hay primer elemento"
 --4
 
 sinElPrimero :: [a] -> [a]
-sinElPrimero a = tail a
-
+sinElPrimero (_:xs) = xs
+sinElPrimero _ = error "no hay elementos para mostrar"
 --5
 
 splitHead :: [a] -> (a, [a])
