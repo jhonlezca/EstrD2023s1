@@ -228,7 +228,8 @@ estaVacia  [] = True
 estaVacia  (_:_) = False 
  
 --elPrimero :: [a] -> a
-elPrimero a = head a
+elPrimero (x:) = x
+elPrimero _ = error " no hay primer elemento"
 
 --4
 
