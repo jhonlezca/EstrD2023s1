@@ -60,9 +60,9 @@ siguiente :: Dir -> Dir
 siguiente d = 
     case d of 
         Norte -> Este
-        Sur   -> Oeste
         Este  -> Sur
-        Oeste -> Norte
+        Sur   -> Oeste
+        Oeste -> error " no hay siguiente dirección "
 
 
 --3_2
