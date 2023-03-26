@@ -128,7 +128,8 @@ yTambien _ _ = False
 --d )
 
 oBien :: Bool -> Bool -> Bool
-oBien b b2 = b || b2
+oBien False False = False 
+oBien _ _ = True
 
 --4. Registros
 
