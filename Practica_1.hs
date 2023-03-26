@@ -99,13 +99,12 @@ vieneDespues Domingo Lunes    = True
 vieneDespues _ _              = False
 
 --d)
-estaEnElMedio :: DiaDeSemana -> Bool
-estaEnElMedio Martes    = True
-estaEnElMedio Miercoles = True
-estaEnElMedio Jueves    = True
-estaEnElMedio Viernes   = True
-estaEnElMedio Sabado    = True
-estaEnElMedio _         = False
+
+estaEnElMedio :: DiaDeSemana -> Bool
+estaEnElMedio Domingo  = False 
+estaEnElMedio Lunes    = False 
+estaEnElMedio _        = True 
+
 
 --3_3
 --a)
