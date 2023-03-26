@@ -147,10 +147,10 @@ crecer :: Persona -> Persona
 crecer (P n e)  = P n (e+1)
 
 cambioDeNombre :: String -> Persona -> Persona
-cambioDeNombre nuevoNombre (P n e) = (P nuevoNombre e) 
+cambioDeNombre nuevoNombre (P n e) = P nuevoNombre e
 
 esMayorQueLaOtra :: Persona -> Persona -> Bool
-esMayorQueLaOtra p p2 = (edad p) > (edad p2)
+esMayorQueLaOtra p p2 = edad p > edad p2
 
 laQueEsMayor :: Persona -> Persona -> Persona
 laQueEsMayor p1 p2 = if( esMayorQueLaOtra p1 p2)
