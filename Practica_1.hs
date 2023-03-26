@@ -122,7 +122,8 @@ implica  _ _        = True
 --c)
 
 yTambien :: Bool -> Bool -> Bool
-yTambien b b2 = b && b2
+yTambien True True = True 
+yTambien _ _ = False 
 
 --d )
 
