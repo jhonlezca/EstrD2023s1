@@ -89,13 +89,13 @@ empiezaConM  _        = False
 --c)
 vieneDespues :: DiaDeSemana -> DiaDeSemana -> Bool
 
-vieneDespues Lunes Martes     = True 
-vieneDespues Martes miercoles = True
-vieneDespues Miercoles Jueves = True
-vieneDespues Jueves Viernes   = True
-vieneDespues Viernes Sabado   = True
-vieneDespues Sabado Domingo   = True
-vieneDespues Domingo Lunes    = True
+vieneDespues _ Lunes    = True 
+vieneDespues _ Martes  = True
+vieneDespues _ Miercoles = True
+vieneDespues _ Jueves    = True
+vieneDespues _ Viernes    = True
+vieneDespues _ Sabado  = True
+vieneDespues _ Domingo  = True
 vieneDespues _ _              = False
 
 --d)
