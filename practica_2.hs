@@ -266,3 +266,72 @@ maria = P "maria" 500
 jhon= E "joni "[chiko,lapras, char, lapras]
 
 emau = E "ema" [char]
+
+
+
+data Seniority = Junior | SemiSenior | Senior
+ deriving Show 
+data Proyecto = ConsProyecto String
+ deriving Show 
+data Rol = Developer Seniority Proyecto | Management Seniority Proyecto
+
+ deriving Show 
+data Empresa = ConsEmpresa [Rol]
+ deriving Show 
+
+programador1 = Junior
+programador2= SemiSenior 
+programador3= Senior 
+
+
+proyecto1 = ConsProyecto "pro1"
+proyecto2 = ConsProyecto "pro2"
+proyecto3 = ConsProyecto "pro3"
+proyecto4 = ConsProyecto "pro4"
+
+
+rol1= Developer programador1 proyecto1
+rol2 = Management programador2 proyecto2
+rol3= Developer programador1 proyecto3
+
+rol4 = Management programador3 proyecto4
+
+
+tec= ConsEmpresa [rol2,rol4,rol2,rol4]
+dat=ConsEmpresa [rol2,rol4,rol2,rol4]
+alfa = ConsEmpresa [rol2,rol4,rol2,rol3]
+{-
+Dada una empresa denota la lista de proyectos en los que trabaja, sin elementos repetidos.
+-}
+
+     :: Empresa -> [Proyecto]
+proyectos (ConsEmpresa [])=[]
+proyectos (ConsEmpresa (n:ns)) = if noEstaRepetido (proyecto n) (proyectosDe ns)
+then proyectos (ConsEmpresa ns) 
+else  proyecto n : proyectos (ConsEmpresa ns)
+
+
+
+-- noEstaRepetido dado 1 Proyecto y una Lista de Proyectos  devuelve  True si esta repetido en caso contrario False
+
+noEstaRepetido:: Proyecto -> [Proyecto] -> Bool 
+noEstaRepetido r [] = False 
+noEstaRepetido r (n:ns) = mismoProyecto r n || noEstaRepetido r ns
+
+
+-- proyecto : dado 1 Rol devuelve el proyecto  del mismo
+proyecto :: Rol -> Proyecto 
+proyecto (Developer _ p)= ps
+proyecto (Management _ p)= p
+
+-- proyectoDe: dado una lista de Roles devuelve una lista de proyectos  de la misma
+
+proyectosDe :: [Rol]-> [Proyecto]
+proyectosDe [] = []
+proyectosDe (x:xs) = proyecto x : proyectosDe xs
+
+
+-- mismoProyecto: dado 2 proyectos devuelve True si son iguales en caso contrario  False
+mismoProyecto ::Proyecto -> Proyecto -> Bool
+mismoProyecto (ConsProyecto s) (ConsProyecto s2)= s==s2
+
