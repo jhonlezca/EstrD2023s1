@@ -304,7 +304,7 @@ alfa = ConsEmpresa [rol2,rol4,rol2,rol3]
 Dada una empresa denota la lista de proyectos en los que trabaja, sin elementos repetidos.
 -}
 
-     :: Empresa -> [Proyecto]
+proyectos :: Empresa -> [Proyecto]
 proyectos (ConsEmpresa [])=[]
 proyectos (ConsEmpresa (n:ns)) = if noEstaRepetido (proyecto n) (proyectosDe ns)
 then proyectos (ConsEmpresa ns) 
@@ -321,7 +321,7 @@ noEstaRepetido r (n:ns) = mismoProyecto r n || noEstaRepetido r ns
 
 -- proyecto : dado 1 Rol devuelve el proyecto  del mismo
 proyecto :: Rol -> Proyecto 
-proyecto (Developer _ p)= ps
+proyecto (Developer _ p)= p
 proyecto (Management _ p)= p
 
 -- proyectoDe: dado una lista de Roles devuelve una lista de proyectos  de la misma
