@@ -293,19 +293,19 @@ proyecto4 = ConsProyecto "pro4"
 rol1= Developer programador1 proyecto1
 rol2 = Management programador2 proyecto2
 rol3= Developer programador1 proyecto3
-
 rol4 = Management programador3 proyecto4
+rol5 = Management programador3 proyecto1
 
 
 tec= ConsEmpresa [rol2,rol4,rol2,rol4]
 dat=ConsEmpresa [rol2,rol4,rol2,rol4]
-alfa = ConsEmpresa [rol2,rol4,rol2,rol3]
+alfa = ConsEmpresa [rol2,rol4,rol2,rol3,rol5]
 {-
 Dada una empresa denota la lista de proyectos en los que trabaja, sin elementos repetidos.
 -}
 
-     :: Empresa -> [Proyecto]
-proyectos (ConsEmpresa [])=[]
+proyectos:: Empresa -> [Proyecto]
+proyectos (ConsEmpresa [] ) = []
 proyectos (ConsEmpresa (n:ns)) = if noEstaRepetido (proyecto n) (proyectosDe ns)
 then proyectos (ConsEmpresa ns) 
 else  proyecto n : proyectos (ConsEmpresa ns)
@@ -321,7 +321,7 @@ noEstaRepetido r (n:ns) = mismoProyecto r n || noEstaRepetido r ns
 
 -- proyecto : dado 1 Rol devuelve el proyecto  del mismo
 proyecto :: Rol -> Proyecto 
-proyecto (Developer _ p)= ps
+proyecto (Developer _ p)= p
 proyecto (Management _ p)= p
 
 -- proyectoDe: dado una lista de Roles devuelve una lista de proyectos  de la misma
@@ -335,3 +335,32 @@ proyectosDe (x:xs) = proyecto x : proyectosDe xs
 mismoProyecto ::Proyecto -> Proyecto -> Bool
 mismoProyecto (ConsProyecto s) (ConsProyecto s2)= s==s2
 
+
+losDevSenior :: Empresa -> [Proyecto] -> Int
+losDevSenior (ConsEmpresa []) _ = 0
+losDevSenior (ConsEmpresa _ ) [] = 0
+losDevSenior (ConsEmpresa (x:xs)) ys = (unDevSenior x ys) + (losDevSenior (ConsEmpresa xs) ys)
+
+
+unDevSenior :: Rol -> [Proyecto] -> Int
+unDevSenior   r  xs = if colabaraUnSenior r && perteneceAlProyecto (proyecto r) xs
+                        then 1
+                        else 0
+
+
+perteneceAlProyecto :: Proyecto -> [Proyecto] -> Bool
+perteneceAlProyecto p [] = False
+perteneceAlProyecto p (x:xs) =  mismoProyecto p x || perteneceAlProyecto p xs
+
+
+-- unSenior: dados un Rol y un Proyecto verifica si en dicho Rol colabora un programador senior tambien se verifica si pertenece al proyecto dadocomoparametro
+
+
+
+colabaraUnSenior :: Rol -> Bool
+colabaraUnSenior (Developer colaborador _) = esSenior colaborador
+colabaraUnSenior (Management colaborador _ ) = esSenior colaborador
+
+esSenior :: Seniority -> Bool
+esSenior Senior = True
+esSenior _      = False
