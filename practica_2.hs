@@ -294,12 +294,20 @@ rol1= Developer programador1 proyecto1
 rol2 = Management programador2 proyecto2
 rol3= Developer programador1 proyecto3
 rol4 = Management programador3 proyecto4
-rol5 = Management programador3 proyecto1
 
 
-tec= ConsEmpresa [rol2,rol4]
+rol5 = Management programador1 proyecto2
+rol6 = Management programador2 proyecto2
+rol7 = Management programador3 proyecto2
+rol8 = Developer  programador1 proyecto2
+rol9 = Developer  programador2 proyecto2
+
+
+
+tec= ConsEmpresa [rol2,rol5,rol8]
 dat=ConsEmpresa [rol2,rol4,rol2,rol4]
 alfa = ConsEmpresa [rol2,rol4,rol2,rol3,rol5]
+mec = ConsEmpresa [rol5,rol6,rol7]
 {-
 Dada una empresa denota la lista de proyectos en los que trabaja, sin elementos repetidos.
 -}
@@ -371,19 +379,27 @@ esSenior _      = False
 cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
 cantQueTrabajanEn _ (ConsEmpresa [])=  0
 cantQueTrabajanEn [] (ConsEmpresa _)=  0
-cantQueTrabajanEn (n:ns) (ConsEmpresa xs) =  (contarEmpleado n (proyectosDe xs)) + (cantQueTrabajanEn ns (ConsEmpresa xs))
+cantQueTrabajanEn ns (ConsEmpresa (x:xs)) =  (contarEmpleado ns (proyecto x)) + (cantQueTrabajanEn ns (ConsEmpresa xs))
 
 
 
 
-contarEmpleado :: Proyecto -> [Proyecto] -> Int
-contarEmpleado p xs = if perteneceAlProyecto p xs
+contarEmpleado :: [Proyecto] -> Proyecto -> Int
+contarEmpleado xs p = if perteneceAlProyecto p xs
                         then 1
                         else 0
 
 
 --Indica la cantidad de empleados que trabajan en alguno de los proyectos dados
 
+--asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
+
+
+{-
+  Devuelve una lista de pares que representa a los proyectos (sin repetir) junto con su
+    
+    cantidad de personas involucradas.
+-}
 
 
 
