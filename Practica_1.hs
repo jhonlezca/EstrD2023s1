@@ -154,7 +154,7 @@ esMayorQueLaOtra :: Persona -> Persona -> Bool
 esMayorQueLaOtra p p2 = edad p > edad p2
 
 laQueEsMayor :: Persona -> Persona -> Persona
-laQueEsMayor p1 p2 = if( esMayorQueLaOtra p1 p2)
+laQueEsMayor p1 p2 = if esMayorQueLaOtra p1 p2
                      then p1
                      else p2 
 
