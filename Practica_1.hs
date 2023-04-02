@@ -100,9 +100,9 @@ vieneDespues _ _              = False
 
 --d)
 
-estaEnElMedio :: DiaDeSemana -> Bool
-estaEnElMedio Domingo  = False 
-estaEnElMedio Lunes    = False 
+estaEnElMedio::DiaDeSemana->Bool
+estaEnElMedio Domingo = False 
+estaEnElMedio Lunes = False 
 estaEnElMedio _        = True 
 
 
@@ -228,7 +228,7 @@ estaVacia  [] = True
 estaVacia  (_:_) = False 
  
 --elPrimero :: [a] -> a
-elPrimero (x:) = x
+elPrimero (x:xs) = x
 elPrimero _ = error " no hay primer elemento"
 
 --4
