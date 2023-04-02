@@ -392,7 +392,23 @@ contarEmpleado xs p = if perteneceAlProyecto p xs
 
 --Indica la cantidad de empleados que trabajan en alguno de los proyectos dados
 
---asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
+asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
+asignadosPorProyecto empresa = proyectoYTrabajadores (proyectos empresa) empresa
+
+
+proyectoYTrabajadores :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
+proyectoYTrabajadores [] e = []
+proyectoYTrabajadores (n:ns)  (ConsEmpresa xs) = duplaProyectoTrabajador n (proyectosDe xs) : proyectoYTrabajadores ns (ConsEmpresa xs)
+
+
+duplaProyectoTrabajador :: Proyecto -> [Proyecto] -> (Proyecto, Int)
+duplaProyectoTrabajador p xs = (p, cantidadTrabajadoresEn p xs)
+
+cantidadTrabajadoresEn :: Proyecto -> [Proyecto] -> Int
+cantidadTrabajadoresEn  p [] = 0
+cantidadTrabajadoresEn p (x:xs) = if mismoProyecto p x
+                                    then 1 + cantidadTrabajadoresEn p xs
+                                    else cantidadTrabajadoresEn p xs 
 
 
 {-
