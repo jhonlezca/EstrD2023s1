@@ -297,7 +297,7 @@ rol4 = Management programador3 proyecto4
 rol5 = Management programador3 proyecto1
 
 
-tec= ConsEmpresa [rol2,rol4,rol2,rol4]
+tec= ConsEmpresa [rol2,rol4]
 dat=ConsEmpresa [rol2,rol4,rol2,rol4]
 alfa = ConsEmpresa [rol2,rol4,rol2,rol3,rol5]
 {-
@@ -365,3 +365,36 @@ colabaraUnSenior (Management colaborador _ ) = esSenior colaborador
 esSenior :: Seniority -> Bool
 esSenior Senior = True
 esSenior _      = False
+
+
+
+cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
+cantQueTrabajanEn _ (ConsEmpresa [])=  0
+cantQueTrabajanEn [] (ConsEmpresa _)=  0
+cantQueTrabajanEn (n:ns) (ConsEmpresa xs) =  (contarEmpleado n (proyectosDe xs)) + (cantQueTrabajanEn ns (ConsEmpresa xs))
+
+
+
+
+contarEmpleado :: Proyecto -> [Proyecto] -> Int
+contarEmpleado p xs = if perteneceAlProyecto p xs
+                        then 1
+                        else 0
+
+
+--Indica la cantidad de empleados que trabajan en alguno de los proyectos dados
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
