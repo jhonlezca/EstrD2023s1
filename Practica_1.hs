@@ -122,9 +122,13 @@ implica   True  _  = True
 
 --c)
 
+
+
 yTambien :: Bool -> Bool -> Bool
 yTambien True True = True 
-yTambien _ _ = False 
+yTambien True _ = False 
+yTambien _ True  = False 
+yTambien False False = False
 
 --d )
 
