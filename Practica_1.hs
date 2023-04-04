@@ -133,8 +133,9 @@ yTambien False False = False
 --d )
 
 oBien :: Bool -> Bool -> Bool
+oBien True _ = True 
+oBien _ True = True 
 oBien False False = False 
-oBien _ _ = True
 
 --4. Registros
 
