@@ -122,20 +122,17 @@ implica   True  _  = True
 
 --c)
 
-
-
 yTambien :: Bool -> Bool -> Bool
 yTambien True True = True 
-yTambien True _ = False 
-yTambien _ True  = False 
-yTambien False False = False
+yTambien _ False = False 
+yTambien False _ = False 
 
 --d )
 
 oBien :: Bool -> Bool -> Bool
 oBien True _ = True 
 oBien _ True = True 
-oBien False False = False 
+oBien False _  = False 
 
 --4. Registros
 
