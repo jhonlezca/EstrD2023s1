@@ -88,15 +88,17 @@ empiezaConM  _        = False
 
 --c)
 vieneDespues :: DiaDeSemana -> DiaDeSemana -> Bool
+vieneDespues d1 d2 = (numDia d1) > (numDia d2)
 
-vieneDespues _ Lunes    = True 
-vieneDespues _ Martes  = True
-vieneDespues _ Miercoles = True
-vieneDespues _ Jueves    = True
-vieneDespues _ Viernes    = True
-vieneDespues _ Sabado  = True
-vieneDespues _ Domingo  = True
-vieneDespues _ _              = False
+numDia:: DiaDeSemana -> Int 
+numDia Lunes =1
+numDia Martes = 2
+numDia Miercoles = 3
+numDia Jueves = 4
+numDia Viernes = 5
+numDia Sabado = 6
+numDia Domingo = 7
+
 
 --d)
 
