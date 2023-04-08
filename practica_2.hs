@@ -68,7 +68,7 @@ iguales x y = if x == y
 --9
 losMenoresA :: Int -> [Int] -> [Int]
 losMenoresA n []= []
-losMenoresA n (x:xs)  = if(n > x)
+losMenoresA n (x:xs)  = if n > x
 then x : losMenoresA n xs
 else losMenoresA n xs
 
