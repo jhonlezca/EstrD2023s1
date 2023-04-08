@@ -235,7 +235,7 @@ else 0
 
 --2
 cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantPokemonDe _ (E _ [])= 0
+cantPokemonDe _ (E apodo [])= 0
 cantPokemonDe tipo (E n (x:xs))=  (esDe tipo x )+( cantPokemonDe tipo (E n xs ))
 
 --4
