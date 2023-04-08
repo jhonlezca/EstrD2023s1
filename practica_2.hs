@@ -136,7 +136,7 @@ repetir 0 _ = []
 repetir n e = e: repetir (n-1) e
 --4
 losPrimeros :: Int -> [a] -> [a]
-losPrimeros 0 _ = []
+losPrimeros 0 xs = xs
 losPrimeros _ [] = []
 losPrimeros n (x:xs) =  x: losPrimeros (n-1) xs
 
