@@ -25,8 +25,10 @@ sucesores (n:ns) = (n+1) : sucesores ns
 
 --4
 conjuncion :: [Bool] -> Bool
-conjuncion [] = True
+conjuncion [] = False
+conjuncion [x] = x
 conjuncion (n:ns) = n && conjuncion ns
+
 {-Dada una lista de booleanos devuelve True si todos sus elementos son True.-}
 
 --5.
