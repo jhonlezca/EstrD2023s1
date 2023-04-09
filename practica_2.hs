@@ -25,8 +25,10 @@ sucesores (n:ns) = (n+1) : sucesores ns
 
 --4
 conjuncion :: [Bool] -> Bool
-conjuncion [] = True
+conjuncion [] = False
+conjuncion [x] = x
 conjuncion (n:ns) = n && conjuncion ns
+
 {-Dada una lista de booleanos devuelve True si todos sus elementos son True.-}
 
 --5.
@@ -68,7 +70,7 @@ iguales x y = if x == y
 --9
 losMenoresA :: Int -> [Int] -> [Int]
 losMenoresA n []= []
-losMenoresA n (x:xs)  = if(n > x)
+losMenoresA n (x:xs)  = if n > x
 then x : losMenoresA n xs
 else losMenoresA n xs
 
@@ -124,7 +126,6 @@ factorial 0 = 1
 factorial n =  n * factorial (n-1)
 --2
 cuentaRegresiva :: Int -> [Int]
-cuentaRegresiva (-1) = []
 cuentaRegresiva n = if n < 0
 then []
 else n : cuentaRegresiva (n-1)
@@ -135,7 +136,7 @@ repetir 0 _ = []
 repetir n e = e: repetir (n-1) e
 --4
 losPrimeros :: Int -> [a] -> [a]
-losPrimeros 0 _ = []
+losPrimeros 0 xs = xs
 losPrimeros _ [] = []
 losPrimeros n (x:xs) =  x: losPrimeros (n-1) xs
 
@@ -234,7 +235,7 @@ else 0
 
 --2
 cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantPokemonDe _ (E _ [])= 0
+cantPokemonDe _ (E apodo [])= 0
 cantPokemonDe tipo (E n (x:xs))=  (esDe tipo x )+( cantPokemonDe tipo (E n xs ))
 
 --4
