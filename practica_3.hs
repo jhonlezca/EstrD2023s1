@@ -199,6 +199,8 @@ ramaMasLarga (NodeT i t1 t2) = if heightT t1 > heightT t2 then  [i] ++ ramaMasLa
 
 --2.2 Expresiones
 
+data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA 
+
 
 eval :: ExpA -> Int
 eval (Valor n)  = n
