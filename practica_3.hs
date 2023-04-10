@@ -195,6 +195,16 @@ ramaMasLarga :: Tree a -> [a]
 ramaMasLarga EmptyT = []
 ramaMasLarga (NodeT i t1 t2) = if heightT t1 > heightT t2 then  [i] ++ ramaMasLarga t1 else [i] ++ ramaMasLarga t2
 
+todosLosCaminos :: Tree a -> [[a]]
+todosLosCaminos EmptyT = []
+todosLosCaminos (NodeT i t1 t2) = [i] : consACada i (todosLosCaminos t1) ++ consACada i (todosLosCaminos t2)
+
+
+
+consACada :: a -> [[a]] -> [[a]]
+consACada x [] = []
+consACada x (xs:xss) = (x:xs) : consACada x xss
+
 
 
 --2.2 Expresiones
