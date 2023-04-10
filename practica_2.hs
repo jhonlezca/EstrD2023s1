@@ -142,8 +142,8 @@ losPrimeros n (x:xs) =  x: losPrimeros (n-1) xs
 
 --5
 sinLosPrimeros :: Int -> [a] -> [a]
-sinLosPrimeros 1 (_:xs) = xs
 sinLosPrimeros _ [] = []
+sinLosPrimeros 0 xs = xs
 sinLosPrimeros n (x:xs)= sinLosPrimeros (n-1) xs
 
 
