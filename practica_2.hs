@@ -234,9 +234,12 @@ else 0
 
 
 --2
-cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
-cantPokemonDe _ (E apodo [])= 0
-cantPokemonDe tipo (E n (x:xs))=  (esDe tipo x )+( cantPokemonDe tipo (E n xs ))
+cantPokemonDe :: TipoDePokemon -> Entrenador -> Int 
+cantPokemonDe tipo (E apodo xs)= pokemonesDe tipo xs
+
+pokemonesDe:: TipoDePokemon-> [Pokemon]-> Int 
+pokemonesDe _ [] = 0
+pokemonesDe tipo (x:xs) = unoSi (mismoTipo tipo (tipoPokemon x)) + pokemonesDe tipo xs
 
 --4
 esMaestroPokemon :: Entrenador -> Bool
