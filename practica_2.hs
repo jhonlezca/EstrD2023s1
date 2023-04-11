@@ -341,30 +341,28 @@ mismoProyecto ::Proyecto -> Proyecto -> Bool
 mismoProyecto (ConsProyecto s) (ConsProyecto s2)= s==s2
 
 
-losDevSenior :: Empresa -> [Proyecto] -> Int
-losDevSenior (ConsEmpresa []) _ = 0
-losDevSenior (ConsEmpresa _ ) [] = 0
-losDevSenior (ConsEmpresa (x:xs)) ys = (unDevSenior x ys) + (losDevSenior (ConsEmpresa xs) ys)
+contarDevSenior :: [Rol] -> [Proyecto] -> Int
+contarDevSenior [] xs         = 0
+contarDevSenior (x:xs) ys = (unoSiEsDevSenior x ys) + (contarDevSenior xs ys )
+
+unoSiEsDevSenior ::Rol -> [Proyecto] -> Int
+unoSiEsDevSenior r  ys = if colabaraUnSenior r &&  elProyectoPertenece (proyecto r) ys 
+                            then 1
+                            else 0
 
 
-unDevSenior :: Rol -> [Proyecto] -> Int
-unDevSenior   r  xs = if colabaraUnSenior r && perteneceAlProyecto (proyecto r) xs
-                        then 1
-                        else 0
+elProyectoPertenece :: Proyecto -> [Proyecto] -> Bool
+elProyectoPertenece _  []     =  False 
+elProyectoPertenece p ( x:xs) = mismoProyecto p x || elProyectoPertenece p xs 
 
-
-perteneceAlProyecto :: Proyecto -> [Proyecto] -> Bool
-perteneceAlProyecto p [] = False
-perteneceAlProyecto p (x:xs) =  mismoProyecto p x || perteneceAlProyecto p xs
 
 
 -- unSenior: dados un Rol y un Proyecto verifica si en dicho Rol colabora un programador senior tambien se verifica si pertenece al proyecto dadocomoparametro
 
 
-
 colabaraUnSenior :: Rol -> Bool
-colabaraUnSenior (Developer colaborador _) = esSenior colaborador
-colabaraUnSenior (Management colaborador _ ) = esSenior colaborador
+colabaraUnSenior (Developer colaborador p) = esSenior colaborador
+colabaraUnSenior (Management colaborador p ) = False
 
 esSenior :: Seniority -> Bool
 esSenior Senior = True
