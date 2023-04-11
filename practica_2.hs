@@ -233,9 +233,18 @@ then 1
 else 0
 
 
+
+
+
 --2
-cantPokemonDe :: TipoDePokemon -> Entrenador -> Int 
-cantPokemonDe tipo (E apodo xs)= pokemonesDe tipo xs
+
+unoSi :: Bool -> Int
+unoSi True  = 1
+unoSi False = 0
+
+
+cantPokemonDe::TipoDePokemon -> Entrenador -> Int 
+cantPokemonDe tipo (E apodo xs)= pokemonesDe tipo xs
 
 pokemonesDe:: TipoDePokemon-> [Pokemon]-> Int 
 pokemonesDe _ [] = 0
@@ -321,7 +330,7 @@ proyectos :: Empresa -> [Proyecto]
 proyectos (ConsEmpresa xs ) = proyectosSinRepetir xs
 
 proyectosSinRepetir:: [Rol] -> [Proyecto]
-proyectosSinRepetir []      =
+proyectosSinRepetir []      = []
 proyectosSinRepetir (x:xs)  = if estaRepetido (proyecto x) (proyectosSinRepetir xs)
                                 then proyectosSinRepetir xs
                                 else proyecto x : proyectosSinRepetir xs
@@ -373,39 +382,7 @@ esSenior _      = False
 
 
 
-cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
-cantQueTrabajanEn _ (ConsEmpresa [])=  0
-cantQueTrabajanEn [] (ConsEmpresa _)=  0
-cantQueTrabajanEn ns (ConsEmpresa (x:xs)) =  (contarEmpleado ns (proyecto x)) + (cantQueTrabajanEn ns (ConsEmpresa xs))
-
-
-
-
-contarEmpleado :: [Proyecto] -> Proyecto -> Int
-contarEmpleado xs p = if perteneceAlProyecto p xs
-                        then 1
-                        else 0
-
-
 --Indica la cantidad de empleados que trabajan en alguno de los proyectos dados
-
-asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
-asignadosPorProyecto empresa = proyectoYTrabajadores (proyectos empresa) empresa
-
-
-proyectoYTrabajadores :: [Proyecto] -> Empresa -> [(Proyecto, Int)]
-proyectoYTrabajadores [] e = []
-proyectoYTrabajadores (n:ns)  (ConsEmpresa xs) = duplaProyectoTrabajador n (proyectosDe xs) : proyectoYTrabajadores ns (ConsEmpresa xs)
-
-
-duplaProyectoTrabajador :: Proyecto -> [Proyecto] -> (Proyecto, Int)
-duplaProyectoTrabajador p xs = (p, cantidadTrabajadoresEn p xs)
-
-cantidadTrabajadoresEn :: Proyecto -> [Proyecto] -> Int
-cantidadTrabajadoresEn  p [] = 0
-cantidadTrabajadoresEn p (x:xs) = if mismoProyecto p x
-                                    then 1 + cantidadTrabajadoresEn p xs
-                                    else cantidadTrabajadoresEn p xs 
 
 
 {-
