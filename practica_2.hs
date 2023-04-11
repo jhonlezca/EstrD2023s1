@@ -321,7 +321,7 @@ proyectos :: Empresa -> [Proyecto]
 proyectos (ConsEmpresa xs ) = proyectosSinRepetir xs
 
 proyectosSinRepetir:: [Rol] -> [Proyecto]
-proyectosSinRepetir []      =
+proyectosSinRepetir []      = []
 proyectosSinRepetir (x:xs)  = if estaRepetido (proyecto x) (proyectosSinRepetir xs)
                                 then proyectosSinRepetir xs
                                 else proyecto x : proyectosSinRepetir xs
