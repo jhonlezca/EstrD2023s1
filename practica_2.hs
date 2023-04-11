@@ -315,30 +315,25 @@ Dada una empresa denota la lista de proyectos en los que trabaja, sin elementos 
 
 
 proyectos :: Empresa -> [Proyecto]
-proyectos (ConsEmpresa [])=[]
-proyectos (ConsEmpresa (n:ns)) = if noEstaRepetido (proyecto n) (proyectosDe ns)
-then proyectos (ConsEmpresa ns) 
-else  proyecto n : proyectos (ConsEmpresa ns)
+proyectos (ConsEmpresa xs ) = proyectosSinRepetir xs
 
+proyectosSinRepetir:: [Rol] -> [Proyecto]
+proyectosSinRepetir []      =
+proyectosSinRepetir (x:xs)  = if estaRepetido (proyecto x) (proyectosSinRepetir xs)
+                                then proyectosSinRepetir xs
+                                else proyecto x : proyectosSinRepetir xs
 
+-- estaRepetido dado 1 Proyecto y una Lista de Proyectos  devuelve  True si esta repetido en caso contrario False
 
--- noEstaRepetido dado 1 Proyecto y una Lista de Proyectos  devuelve  True si esta repetido en caso contrario False
-
-noEstaRepetido:: Proyecto -> [Proyecto] -> Bool 
-noEstaRepetido r [] = False 
-noEstaRepetido r (n:ns) = mismoProyecto r n || noEstaRepetido r ns
+estaRepetido :: Proyecto -> [Proyecto] -> Bool
+estaRepetido p []     = False
+estaRepetido p (x:xs) = mismoProyecto p x || estaRepetido p xs
 
 
 -- proyecto : dado 1 Rol devuelve el proyecto  del mismo
 proyecto :: Rol -> Proyecto 
 proyecto (Developer _ p)= p
 proyecto (Management _ p)= p
-
--- proyectoDe: dado una lista de Roles devuelve una lista de proyectos  de la misma
-
-proyectosDe :: [Rol]-> [Proyecto]
-proyectosDe [] = []
-proyectosDe (x:xs) = proyecto x : proyectosDe xs
 
 
 -- mismoProyecto: dado 2 proyectos devuelve True si son iguales en caso contrario  False
