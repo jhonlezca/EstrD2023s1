@@ -118,23 +118,20 @@ negar False = True
 --b) 
 
 implica :: Bool -> Bool -> Bool
-implica  True False = False
-implica   _  False  = True
-implica   True  _  = True
+implica  False _  = True
+implica  _  b     = b
 
 --c)
 
 yTambien :: Bool -> Bool -> Bool
-yTambien True True = True 
-yTambien _ False = False 
-yTambien False _ = False 
+yTambien  False _ = False
+yTambien _   b    = b
 
 --d )
 
 oBien :: Bool -> Bool -> Bool
-oBien True _ = True 
-oBien _ True = True 
-oBien False _  = False 
+oBien   True _ = True
+oBien   _   b  = b
 
 --4. Registros
 
