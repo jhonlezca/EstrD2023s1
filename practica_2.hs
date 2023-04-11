@@ -344,8 +344,8 @@ estaRepetido p (x:xs) = mismoProyecto p x || estaRepetido p xs
 
 -- proyecto : dado 1 Rol devuelve el proyecto  del mismo
 proyecto :: Rol -> Proyecto 
-proyecto (Developer _ p)= p
-proyecto (Management _ p)= p
+proyecto (Developer programador p) = p
+proyecto (Management programador p)= p
 
 
 -- mismoProyecto: dado 2 proyectos devuelve True si son iguales en caso contrario  False
@@ -382,14 +382,14 @@ esSenior _      = False
 
 
 
---Indica la cantidad de empleados que trabajan en alguno de los proyectos dados
+cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
+cantQueTrabajanEn  xs (ConsEmpresa ys) = contarEmpleados xs ys
+
+contarEmpleados :: [Proyecto] -> [Rol] -> Int
+contarEmpleados  xs  []        = 0
+contarEmpleados xs (y:ys)  = unoSi (elProyectoPertenece (proyecto y) xs)  + (contarEmpleados xs ys)
 
 
-{-
-  Devuelve una lista de pares que representa a los proyectos (sin repetir) junto con su
-    
-    cantidad de personas involucradas.
--}
 
 
 
