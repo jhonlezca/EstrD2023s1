@@ -100,12 +100,13 @@ reversa [] = []
 reversa (x:xs) = reversa xs ++ [x]
 
 --14
-zipMaximos :: [Int] -> [Int] -> [Int]
-zipMaximos [] _ = []
-zipMaximos _ [] =[]
-zipMaximos (x:xs)(y:ys)= if x > y 
-then x : zipMaximos xs ys
-else y: zipMaximos xs ys
+zipMaximos :: [Int] -> [Int] -> [Int] 
+zipMaximos [] ys = ys
+zipMaximos xs [] = xs
+zipMaximos (x:xs)(y:ys)=  agregarAlMayor x y : (zipMaximos xs ys)
+
+agregarAlMayor:: Int->Int->Int 
+agregarAlMayor a b = if a >= b then a else b
 
 
 --15
