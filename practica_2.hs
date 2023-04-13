@@ -391,7 +391,19 @@ contarEmpleados  xs  []        = 0
 contarEmpleados xs (y:ys)  = unoSi (elProyectoPertenece (proyecto y) xs)  + (contarEmpleados xs ys)
 
 
+asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
+asignadosPorProyecto (ConsEmpresa xs) = proyecto_Y_Asignados xs
 
+proyecto_Y_Asignados:: [Rol]-> [(Proyecto, Int)]
+proyecto_Y_Asignados []     = []
+proyecto_Y_Asignados (x:xs) = sumarOAgregar (proyecto x)(proyecto_Y_Asignados xs)
+
+
+sumarOAgregar:: Proyecto -> [(Proyecto, Int)]-> [(Proyecto, Int)]
+sumarOAgregar p [] = [(p,1)]
+sumarOAgregar p ((x,n):ts)= if mismoProyecto p x
+then (x, n+1):ts
+else (x,n): sumarOAgregar p ts
 
 
 
