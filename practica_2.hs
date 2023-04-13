@@ -252,8 +252,14 @@ pokemonesDe _ [] = 0
 pokemonesDe tipo (x:xs) = unoSi (mismoTipo tipo (tipoPokemon x)) + pokemonesDe tipo xs
 
 --4
-esMaestroPokemon :: Entrenador -> Bool
-esMaestroPokemon e  = cantPokemonDe Planta e >0 && cantPokemonDe Fuego e >0 && cantPokemonDe 
+esMaestroPokemon::Entrenador-> Bool 
+esMaestroPokemon (E apodo xs) = atrapadoDe Agua xs > 0 && atrapadoDe Planta xs > 0 && atrapadoDe Fuego xs > 0
+
+atrapadoDe:: TipoDePokemon -> [Pokemon] -> Int 
+atrapadoDe tipo []     = 0
+atrapadoDe tipo (x:xs) = if mismoTipo tipo (tipoPokemon x) 
+then 1
+else atrapadoDe tipo xs
 
 
 
