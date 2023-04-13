@@ -267,6 +267,7 @@ cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenado
 cuantosDeTipo_De_LeGananATodosLosDe_ tipo (E apodo xs) (E apodo' ys) =  vencidos xs (listado tipo ys)
 
 -- vencidos: se encargar de contar los pokemon derrotados 
+
 vencidos:: [Pokemon]->[Pokemon]->Int
 vencidos xs []         = 0
 vencidos [] ys         = 0
@@ -279,7 +280,9 @@ leGanaA Agua Fuego = True
 leGanaA Fuego Planta = True 
 leGanaA Planta Agua = True 
 leGanaA tipo _ = False 
---listado : apartar de un TipoDePokemon y una lista de Pokémon devuelve una nueva lista con Pokemon del tipo dado
+
+--listado : parte de un TipoDePokemon y una lista de Pokémon devuelve una nueva lista con Pokemon del tipo dado
+
 listado::TipoDePokemon-> [Pokemon]-> [Pokemon]
 listado _ []     = []
 listado t (x:xs) = if mismoTipo t (tipoPokemon x)
