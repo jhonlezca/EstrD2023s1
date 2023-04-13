@@ -253,19 +253,33 @@ pokemonesDe tipo (x:xs) = unoSi (mismoTipo tipo (tipoPokemon x)) + pokemonesDe t
 
 --4
 esMaestroPokemon :: Entrenador -> Bool
-esMaestroPokemon e  = cantPokemonDe Planta e >0 && cantPokemonDe Fuego e >0 && cantPokemonDe Agua e >0
+esMaestroPokemon e  = cantPokemonDe Planta e >0 && cantPokemonDe Fuego e >0 && cantPokemonDe 
 
 
 
 cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
-cuantosDeTipo_De_LeGananATodosLosDe_ tipo e1 e2= if (cantPokemonDe tipo e1) < (cantPokemonDe (nemesis tipo) e2)
-then cantPokemonDe tipo e1
-else cantPokemonDe (nemesis tipo) e2
+cuantosDeTipo_De_LeGananATodosLosDe_ tipo (E apodo xs) (E apodo' ys) =  vencidos xs (listado tipo ys)
 
-nemesis :: TipoDePokemon -> TipoDePokemon
-nemesis Agua = Fuego
-nemesis Planta = Agua 
-nemesis Fuego = Planta 
+-- vencidos: se encargar de contar los pokemon derrotados 
+vencidos:: [Pokemon]->[Pokemon]->Int
+vencidos xs []         = 0
+vencidos [] ys         = 0
+vencidos (x:xs) (y:ys) = if leGanaA (tipoPokemon x) (tipoPokemon y)
+then 1+ vencidos xs ys
+else vencidos xs (y:ys)
+
+leGanaA::TipoDePokemon-> TipoDePokemon-> Bool 
+leGanaA Agua Fuego = True 
+leGanaA Fuego Planta = True 
+leGanaA Planta Agua = True 
+leGanaA tipo _ = False 
+--listado : apartar de un TipoDePokemon y una lista de Pokémon devuelve una nueva lista con Pokemon del tipo dado
+listado::TipoDePokemon-> [Pokemon]-> [Pokemon]
+listado _ []     = []
+listado t (x:xs) = if mismoTipo t (tipoPokemon x)
+then x: listado t xs
+else listado t xs
+
 
 
 lapras = Pk Agua 100
