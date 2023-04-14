@@ -264,16 +264,21 @@ else atrapadoDe tipo xs
 
 
 cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
-cuantosDeTipo_De_LeGananATodosLosDe_ tipo (E apodo xs) (E apodo' ys) =  vencidos xs (listado tipo ys)
+cuantosDeTipo_De_LeGananATodosLosDe_ tipo (E apodo xs) (E apodo' ys) =  vencidos tipo xs ys
 
--- vencidos: se encargar de contar los pokemon derrotados 
+vencidos:: TipoDePokemon ->[Pokemon]->[Pokemon]->Int
+vencidos t [ ] ys = 0
+vencidos t (x:xs) ys = if esDeTipo x t && leGanaATodos x ys
+then 1+ vencidos t xs ys
+else vencidos t xs ys
 
-vencidos:: [Pokemon]->[Pokemon]->Int
-vencidos xs []         = 0
-vencidos [] ys         = 0
-vencidos (x:xs) (y:ys) = if superaA x y
-then 1+ vencidos xs ys
-else vencidos xs (y:ys)
+esDeTipo::Pokemon->TipoDePokemon->Bool 
+esDeTipo (Pk tipo e) t = mismoTipo tipo t
+
+leGanaATodos:: Pokemon->[Pokemon]->Bool 
+leGanaATodos p [] = False 
+leGanaATodos p (pk:pks) = superaA p pk || leGanaATodos p pks
+
 
 
 superaA :: Pokemon -> Pokemon -> Bool 
