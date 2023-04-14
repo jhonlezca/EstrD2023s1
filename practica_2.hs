@@ -271,9 +271,14 @@ cuantosDeTipo_De_LeGananATodosLosDe_ tipo (E apodo xs) (E apodo' ys) =  vencidos
 vencidos:: [Pokemon]->[Pokemon]->Int
 vencidos xs []         = 0
 vencidos [] ys         = 0
-vencidos (x:xs) (y:ys) = if leGanaA (tipoPokemon x) (tipoPokemon y)
+vencidos (x:xs) (y:ys) = if superaA x y
 then 1+ vencidos xs ys
 else vencidos xs (y:ys)
+
+
+superaA :: Pokemon -> Pokemon -> Bool 
+superaA p1 p2 = leGanaA(tipoPokemon p1) (tipoPokemon p2)
+
 
 leGanaA::TipoDePokemon-> TipoDePokemon-> Bool 
 leGanaA Agua Fuego = True 
