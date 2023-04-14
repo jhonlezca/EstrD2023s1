@@ -19,8 +19,7 @@ nroBolitas col (Bolita c cel) = unoSi (mismoColor col c)+ (nroBolitas col cel )
 mismoColor :: Color-> Color -> Bool 
 mismoColor  Azul Azul = True 
 mismoColor  Rojo Rojo = True 
-mismoColor  _ Rojo = False
-mismoColor  Rojo _ = False
+mismoColor    col  _  = False
 
 unoSi :: Bool -> Int
 unoSi True = 1
@@ -33,12 +32,12 @@ poner :: Color -> Celda -> Celda
 poner col cel = Bolita col cel
 
 
-
 sacar :: Color -> Celda -> Celda
-sacar _ CeldaVacia= error "Celda vacia"
-sacar col (Bolita c cel) = if mismoColor col c
-then cel
-else sacar col cel
+sacar col CeldaVacia = CeldaVacia 
+sacar col (Bolita c celda ) = if mismoColor col c
+then celda
+else (Bolita c (sacar col celda))
+
 
 ponerN :: Int -> Color -> Celda -> Celda
 ponerN 0 col cel = cel
