@@ -91,15 +91,17 @@ else 1 + pasosHastaTesoro c
 
 
 
+hayTesoroEn:: Int -> Camino -> Bool
+hayTesoroEn  0 c  = halleTesoro c
+hayTesoroEn  n c  = hayTesoroEn (n-1) (siguienteCamino c)
 
-hayTesoroEn :: Int -> Camino -> Bool
-hayTesoroEn _ Fin = False 
-hayTesoroEn n c = if n > 1
-then hayTesoroEn (n-1) (siguienteCamino c)
-else (n-1) == pasosHastaTesoro  c
+-- halleTesoro: determina si en el camino actual hay un tesoro
+halleTesoro:: Camino -> Bool
+halleTesoro (Cofre xs c) = cofreConTesoro xs
+halleTesoro     _        = False
 
 siguienteCamino :: Camino -> Camino 
-siguienteCamino Fin = error"ya no hay mas camino"
+siguienteCamino Fin = Fin
 siguienteCamino (Nada c ) = c
 siguienteCamino (Cofre xs c) = c
 
