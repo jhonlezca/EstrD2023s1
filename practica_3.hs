@@ -113,7 +113,7 @@ alMenosNTesoros n c = cantDeTesorosEn c >= n
 
 cantDeTesorosEn :: Camino -> Int 
 cantDeTesorosEn Fin = 0
-cantDeTesorosEn (Nada c) = 0 + cantDeTesorosEn c
+cantDeTesorosEn (Nada c) = cantDeTesorosEn c
 cantDeTesorosEn (Cofre xs c) = unoSi(cofreConTesoro xs) + cantDeTesorosEn c
 
 
@@ -127,6 +127,16 @@ else cantTesorosEntre x (y-1) c
 
 data Tree a = EmptyT | NodeT a (Tree a) (Tree a)
  deriving Show 
+
+
+nod0 = NodeT "A" (nod1)(nod2)
+nod1 = NodeT "B" (nod3) (nod4)
+nod2 = NodeT "C" (nod5)(nod6)
+nod3 = NodeT "D" EmptyT EmptyT
+nod4 = NodeT "E" EmptyT EmptyT
+nod5 = NodeT "F" EmptyT EmptyT
+nod6 = NodeT "G" EmptyT EmptyT
+
 
 sumarT :: Tree Int -> Int
 sumarT EmptyT = 0
@@ -170,7 +180,7 @@ mayor a b = if a > b then a else b
 
 mirrorT :: Tree a -> Tree a
 mirrorT EmptyT = EmptyT
-mirrorT (NodeT n t1 t2) = (NodeT n t2 t1)
+mirrorT (NodeT n t1 t2) = (NodeT n (mirrorT t2) (mirrorT t1) ) 
 
 toList :: Tree a -> [a]
 toList EmptyT = []
