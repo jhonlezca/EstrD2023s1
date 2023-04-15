@@ -238,11 +238,21 @@ consACada x (xs:xss) = (x:xs) : consACada x xss
 --2.2 Expresiones
 
 data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA 
+  deriving Show
+
+
+uno = Valor 1
+dos = Valor 2
+tres= Valor 3
+cuatro = Valor 4
+
+suma = Sum cuatro (Sum dos tres)
+mul  = Prod tres (Neg cuatro)
 
 
 eval :: ExpA -> Int
-eval (Valor n)  = n
-eval (Sum (Valor n) (Valor m) ) = n + m
-eval (Prod (Valor n) (Valor m) ) = n * m 
-eval (Neg (Valor n) )   = (-n)
+eval (Valor n)    = n 
+eval (Sum v1 v2)  = (eval v1) + (eval v2)
+eval (Prod v1 v2) = (eval v1) * (eval v2)
+eval (Neg v )     = -(eval v)
 
