@@ -61,7 +61,7 @@ cam1 = Cofre[monedas] cam0
 cam2 = Cofre[basura] cam1
 cam3 =  Cofre [monedas] cam1
 cam4= Cofre[monedas] cam3
-cam5 = Nada (Cofre[basura] (Cofre[monedas] (Nada (Nada (Nada (Cofre[monedas] (Cofre [monedas] Fin)))))))
+cam5 = Nada (Cofre[basura] (Cofre[monedas,monedas] (Nada (Nada (Nada (Cofre[monedas] (Cofre [monedas] Fin)))))))
 
 
 
@@ -118,12 +118,29 @@ cantDeTesorosEn (Cofre xs c) = unoSi(cofreConTesoro xs) + cantDeTesorosEn c
 
 
 cantTesorosEntre :: Int -> Int -> Camino -> Int
-cantTesorosEntre x 0 _ = 0
-cantTesorosEntre x y c = if x <= y
-then unoSi (hayTesoroEn y c) + cantTesorosEntre x (y-1) c
-else cantTesorosEntre x (y-1) c
+cantTesorosEntre  desde hasta camino = (contarTesorosHasta hasta camino) - (contarTesorosHasta (desde-1) camino) 
 
--- Arbole
+
+contarTesorosHasta:: Int -> Camino-> Int
+contarTesorosHasta (-1) _   = 0
+contarTesorosHasta _ Fin = 0
+contarTesorosHasta n c   = (contarTesoros c ) + (contarTesorosHasta (n-1) (siguienteCamino c))
+
+-- contarTesoros dado un camino determina primero si es un cofre de ser asi verifica si dentro del mismo hay tesorosy los cuenta 
+contarTesoros:: Camino -> Int
+contarTesoros Fin          = 0
+contarTesoros (Nada _)     = 0
+contarTesoros (Cofre xs c) = if cofreConTesoro xs
+                                then sumatoriaDeTesoros xs
+                                else 0
+
+
+sumatoriaDeTesoros :: [Objeto] -> Int
+sumatoriaDeTesoros []       = 0
+sumatoriaDeTesoros ( x:xs ) = unoSi(esTesoro x) + sumatoriaDeTesoros xs
+
+
+-- Arboles
 
 data Tree a = EmptyT | NodeT a (Tree a) (Tree a)
  deriving Show 
