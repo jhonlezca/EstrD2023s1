@@ -132,10 +132,9 @@ contarTesorosHasta n c   = (contarTesoros c ) + (contarTesorosHasta (n-1) (sigui
 -- contarTesoros dado un camino determina primero si es un cofre de ser asi verifica si dentro del mismo hay tesorosy los cuenta 
 
 contarTesoros:: Camino -> Int
-contarTesoros (Cofre xs c) = 
-if cofreConTesoro xs
-     then sumatoriaDeTesoros xs
-     else 0
+contarTesoros (Cofre xs c) = if cofreConTesoro xs
+                                then sumatoriaDeTesoros xs
+                                else 0
 contarTesoros _ = 0
 
 
