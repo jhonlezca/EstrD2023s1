@@ -109,6 +109,7 @@ siguienteCamino (Cofre xs c) = c
 alMenosNTesoros::Int->Camino-> Bool
 alMenosNTesoros _ Fin = False
 alMenosNTesoros 0 _   = True 
+alMenosNTesoros n (Nada c)= alMenosNTesoros n c
 alMenosNTesoros n c   = n <= contarTesoros c || alMenosNTesoros (n -contarTesoros c) (siguienteCamino c)
 
 
