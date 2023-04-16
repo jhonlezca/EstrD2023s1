@@ -65,7 +65,7 @@ cam5 = Nada (Cofre[basura] (Cofre[monedas,monedas] (Nada (Nada (Nada (Cofre[mone
 
 
 
-
+ 
 hayTesoro :: Camino -> Bool
 hayTesoro Fin = False
 hayTesoro (Nada c) = hayTesoro c
@@ -246,7 +246,7 @@ data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA
   deriving Show
 
 cero = Valor 0
-uno = Valor 1
+uno = Valor  1
 dos = Valor 2
 tres= Valor 3
 cuatro = Valor 4
@@ -257,7 +257,12 @@ suma = Sum cuatro (Sum dos tres)
 suma2= Sum suma (Sum suma1 suma0)
 suma3 = Sum uno dos
 
-mul  = Prod tres (Sum cuatro (Prod cero uno))
+mul  = Prod tres (Sum cuatro (Prod cero cuatro))
+mul1  = Prod tres (Sum cuatro (Prod uno cuatro))
+
+op = Sum
+neg= Neg uno 
+m= Prod uno cuatro
 
 
 eval :: ExpA -> Int
@@ -265,3 +270,34 @@ eval (Valor n)    = n
 eval (Sum v1 v2)  = (eval v1) + (eval v2)
 eval (Prod v1 v2) = (eval v1) * (eval v2)
 eval (Neg v )     = -(eval v)
+
+
+-- (NodeT (n*2) (mapDobleT t1) (mapDobleT t2))
+
+simplificar:: ExpA->ExpA
+simplificar (Valor n)    = (Valor n)
+simplificar (Sum v1 v2)  = if algunoEs 0 v1 v2
+                             then simplificar (laQueNoEsCero  v1 v2)
+                             else (Sum (simplificar v1) (simplificar v2))
+simplificar (Prod v1 v2) = if algunoEs 0 v1 v2 || algunoEs 1 v1 v2
+                             then simplificar (laQueNoEsCeroNiUno  v1 v2)
+                             else (Prod (simplificar v1) (simplificar v2))
+simplificar (Neg v )     =  (Neg (Neg (simplificar v)))
+
+
+
+--simplificar (Neg v )     = -(eval v)
+algunoEs::Int-> ExpA->ExpA->Bool
+algunoEs n a b = eval a == n || eval b == n  
+
+laQueNoEsCero::ExpA->ExpA->ExpA
+laQueNoEsCero a b = if eval a == 0
+                      then b 
+                      else a
+
+laQueNoEsCeroNiUno::ExpA->ExpA->ExpA
+laQueNoEsCeroNiUno a b = if eval a == 0 || eval a == 1 
+                          then b 
+                          else a
+
+
