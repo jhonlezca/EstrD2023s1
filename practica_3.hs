@@ -92,8 +92,11 @@ else 1 + pasosHastaTesoro c
 
 
 hayTesoroEn:: Int -> Camino -> Bool
-hayTesoroEn  0 c  = halleTesoro c
-hayTesoroEn  n c  = hayTesoroEn (n-1) (siguienteCamino c)
+hayTesoroEn _ Fin          = False
+hayTesoroEn 0   c          = halleTesoro c
+hayTesoroEn n (Nada c)     = hayTesoroEn (n-1) c
+hayTesoroEn n (Cofre xs c) = hayTesoroEn (n-1) c 
+
 
 -- halleTesoro: determina si en el camino actual hay un tesoro
 halleTesoro:: Camino -> Bool
