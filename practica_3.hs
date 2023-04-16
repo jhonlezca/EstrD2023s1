@@ -117,31 +117,34 @@ alMenosNTesoros n (Cofre xs c) = n <= sumatoriaDeTesoros xs || alMenosNTesoros (
 
 
 
+cantTesorosEntre :: Int -> Int -> Camino -> Int
+--cantTesorosEntre  desde hasta camino = (contarTesorosHasta hasta camino) - (contarTesorosHasta (desde-1) camino) 
+cantTesorosEntre p f camino = cantDeTesorosEn (intervaloDelCamino p f camino)
+
+-- intervaloDelCamino: da como resultado el camino desde d hasta h 
+intervaloDelCamino:: Int->Int->Camino->Camino
+intervaloDelCamino  d h c = caminoHasta(h-d)(caminoDesde d c)
+
+
 
 cantDeTesorosEn :: Camino -> Int 
 cantDeTesorosEn Fin = 0
 cantDeTesorosEn (Nada c) = cantDeTesorosEn c
-cantDeTesorosEn (Cofre xs c) = unoSi(cofreConTesoro xs) + cantDeTesorosEn c
+cantDeTesorosEn (Cofre xs c) = sumatoriaDeTesoros xs + cantDeTesorosEn c
 
 
-cantTesorosEntre :: Int -> Int -> Camino -> Int
-cantTesorosEntre  desde hasta camino = (contarTesorosHasta hasta camino) - (contarTesorosHasta (desde-1) camino) 
+caminoHasta::Int->Camino->Camino
+caminoHasta (-1) _           = Fin 
+caminoHasta _ Fin         = Fin  
+caminoHasta n (Nada c)    = (Nada (caminoHasta (n-1) c) ) 
+caminoHasta n (Cofre xs c)= (Cofre xs (caminoHasta (n-1) c) ) 
 
 
-contarTesorosHasta:: Int -> Camino-> Int
-contarTesorosHasta (-1) _   = 0
-contarTesorosHasta _ Fin = 0
-contarTesorosHasta n c   = (contarTesoros c ) + (contarTesorosHasta (n-1) (siguienteCamino c))
-
--- contarTesoros dado un camino determina primero si es un cofre de ser asi verifica si dentro del mismo hay tesorosy los cuenta 
-
-contarTesoros:: Camino -> Int
-contarTesoros (Cofre xs c) = if cofreConTesoro xs
-                                then sumatoriaDeTesoros xs
-                                else 0
-contarTesoros _ = 0
-
-
+caminoDesde::Int->Camino->Camino
+caminoDesde 0 c            = c 
+caminoDesde n Fin          = Fin
+caminoDesde n (Nada c)     = caminoDesde (n-1) c
+caminoDesde n (Cofre xs c) = caminoDesde (n-1) c 
 
 
 sumatoriaDeTesoros :: [Objeto] -> Int
