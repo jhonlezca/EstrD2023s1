@@ -19,7 +19,7 @@ nroBolitas col (Bolita c cel) = unoSi (mismoColor col c)+ (nroBolitas col cel )
 mismoColor :: Color-> Color -> Bool 
 mismoColor  Azul Azul = True 
 mismoColor  Rojo Rojo = True 
-mismoColor    col  _  = False
+mismoColor  _  _  = False
 
 unoSi :: Bool -> Int
 unoSi True = 1
@@ -245,14 +245,19 @@ consACada x (xs:xss) = (x:xs) : consACada x xss
 data ExpA = Valor Int | Sum ExpA ExpA | Prod ExpA ExpA | Neg ExpA 
   deriving Show
 
-
+cero = Valor 0
 uno = Valor 1
 dos = Valor 2
 tres= Valor 3
 cuatro = Valor 4
 
+suma0 = Sum cero uno 
+suma1 = Sum dos cero
 suma = Sum cuatro (Sum dos tres)
-mul  = Prod tres (Neg cuatro)
+suma2= Sum suma (Sum suma1 suma0)
+suma3 = Sum uno dos
+
+mul  = Prod tres (Sum cuatro (Prod cero uno))
 
 
 eval :: ExpA -> Int
@@ -260,4 +265,3 @@ eval (Valor n)    = n
 eval (Sum v1 v2)  = (eval v1) + (eval v2)
 eval (Prod v1 v2) = (eval v1) * (eval v2)
 eval (Neg v )     = -(eval v)
-
